@@ -34,7 +34,7 @@ $container   = get_theme_mod( 'understrap_container_type' );
 				<?php if ( have_posts() ) : ?>
 
 					<?php /* Start the Loop */ ?>
-
+					<div class="card-group">
 					<?php while ( have_posts() ) : the_post(); ?>
 
 						<?php
@@ -46,8 +46,10 @@ $container   = get_theme_mod( 'understrap_container_type' );
 						 */
 						get_template_part( 'loop-templates/content', get_post_format() );
 						?>
+						
 
 					<?php endwhile; ?>
+					</div>
 
 				<?php else : ?>
 
@@ -62,7 +64,7 @@ $container   = get_theme_mod( 'understrap_container_type' );
 
 		<!-- Do the right sidebar check -->
 		<?php get_template_part( 'global-templates/right-sidebar-check' ); ?>
-		
+
 
 	</div><!-- .row -->
 

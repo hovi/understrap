@@ -251,3 +251,31 @@ gulp.task( 'dist-product', ['clean-dist-product'], function() {
 gulp.task( 'clean-dist-product', function() {
   return del( [paths.distprod + '/**'] );
 } );
+
+
+var gutil = require( 'gulp-util' );
+var ftp = require( 'vinyl-ftp' );
+var ftplogin = require("./ftp.json")
+
+gulp.task( 'deploy', function () {
+	var conn = ftp.create( {
+		host:     ftplogin.host,
+		user:     ftplogin.user,
+		password: ftplogin.password,
+		parallel: 1,
+		log:      gutil.log
+	} );
+
+	var globs = [
+    'loop-templates/**',
+		'inc/**',
+		'./*.php',
+		'js/**',
+		'css/**'
+	];
+  
+	return gulp.src( globs, { base: '.', buffer: false } )
+    //.pipe( conn.newer( '/wp-content/themes/understrap' ) )
+		.pipe( conn.dest( '/wp-content/themes/understrap' ) );
+
+} );
